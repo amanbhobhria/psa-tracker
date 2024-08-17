@@ -1,0 +1,227 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
+apply plugin: 'com.android.library'
+apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'signing'
+apply plugin: 'org.jetbrains.dokka'
+
+
+
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+project.ext {
+    archLifecycleVersion = "2.2.0"
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+    namespace "com.psaanalytics.psa.tracker"
+
+    useLibrary 'android.test.base'
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "$project.version"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "TRACKER_LABEL", "\"andr-$project.version\""
+            buildConfigField "String", "TRACKER_VERSION", "\"$project.version\""
+
+            testCoverageEnabled = true
+        }
+        release {
+            buildConfigField "String", "TRACKER_LABEL", "\"andr-$project.version\""
+            buildConfigField "String", "TRACKER_VERSION", "\"$project.version\""
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        abortOnError false
+    }
+
+    sourceSets {
+        androidTest.manifest.srcFile "src/androidTest/AndroidManifest.xml"
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // This enables long timeouts required on slow environments
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000  // Set the timeout to 10 minutes
+        installOptions "-d","-t"
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.preference:preference:1.2.1'
+    compileOnly "androidx.lifecycle:lifecycle-extensions:$project.archLifecycleVersion"
+    compileOnly "com.android.installreferrer:installreferrer:2.2"
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.9'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    // test
+    testImplementation "androidx.lifecycle:lifecycle-extensions:$project.archLifecycleVersion"
+    testImplementation "com.android.installreferrer:installreferrer:2.2"
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'com.google.android.gms:play-services-analytics:18.0.3'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.7.2'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    configurations.implementation.setCanBeResolved(true)
+
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.implementation
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+android.libraryVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        title = "Documentation for snowplow-android-core $version API"
+        description "Generates Javadoc for $variant.name."
+        source = variant.getJavaCompileProvider().get().source
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        doFirst { classpath = files(variant.javaCompiler.classpath.files) + files(ext.androidJar) }
+        options.links("http://docs.oracle.com/javase/7/docs/api/");
+        exclude '**/R.java'
+    }
+}
+
+coveralls {
+    jacocoReportPath "$buildDir/reports/coverage/debug/report.xml"
+}
+
+repositories {
+    mavenCentral()
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                println 'Publishing release:'
+                println GROUP
+                println POM_ARTIFACT_ID
+                println VERSION_NAME
+
+                groupId GROUP
+                artifactId POM_ARTIFACT_ID
+                version VERSION_NAME
+
+                from components.release
+                artifact sourcesJar
+                artifact javadocJar
+
+                pom {
+                    name = POM_NAME
+                    packaging = POM_PACKAGING
+                    description = POM_DESCRIPTION
+                    url = POM_URL
+
+                    licenses {
+                        license {
+                            name = POM_LICENCE_NAME
+                            url = POM_LICENCE_URL
+                            distribution = POM_LICENCE_DIST
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = POM_DEVELOPER_ID
+                            name = POM_DEVELOPER_NAME
+                        }
+                    }
+
+                    scm {
+                        url = POM_SCM_URL
+                        connection = POM_SCM_CONNECTION
+                        developerConnection = POM_SCM_DEV_CONNECTION
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        if (System.getenv('ORG_GRADLE_PROJECT_signingKey') && System.getenv('ORG_GRADLE_PROJECT_signingPassword')) {
+            println 'Found signing credentials. Signing...'
+            def signingKey = findProperty("signingKey")
+            def signingPassword = findProperty("signingPassword")
+            useInMemoryPgpKeys(signingKey, signingPassword)
+            sign publishing.publications.release
+            println 'Used useInMemoryPgpKeys()'
+        } else {
+            println 'Signing credentials not found, skipping.'
+        }
+    }
+}
+
+tasks.withType(DokkaTask.class) {
+    dokkaSourceSets {
+        configureEach {
+            includes.from(project.files(), "Module.md")
+
+            perPackageOption {
+                matchingRegex.set("com.psaanalytics.core.*") // exclude core packages from API docs
+                suppress.set(true)
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+name: Snyk
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Install Snyk
+        run: sudo npm install -g snyk
+
+      - name: Run Snyk to check for vulnerabilities in tracker
+        run: snyk monitor --all-sub-projects --configuration-matching='releaseRuntimeClasspath'

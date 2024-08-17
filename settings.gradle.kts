@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "psa-whitelabelled-demo"

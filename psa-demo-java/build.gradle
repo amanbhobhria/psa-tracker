@@ -47,9 +47,6 @@ android {
     }
 }
 
-
-
-
 dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$project.archLifecycleVersion"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
