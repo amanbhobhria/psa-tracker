@@ -17,7 +17,6 @@
               <args>
                 <arg>$MODULE_DIR$/../../../psa-demo-java/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debugAndroidTest/R.jar</arg>
                 <arg>$MODULE_DIR$/../../../psa-demo-java/build/intermediates/compile_app_classes_jar/debug/classes.jar</arg>
-                <arg>$MODULE_DIR$/../../../psa-tracker/build/intermediates/compile_library_classes_jar/debug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/928a8801734b0e9a89ff09d6ef9c3692/transformed/jetified-okhttp-4.10.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7a228cec380a31de9f5dcf5f7e8988ee/transformed/jetified-okio-jvm-3.0.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/e3f946e2299c0e2316662c8b1d657920/transformed/lifecycle-extensions-2.2.0-api.jar</arg>
@@ -116,7 +115,6 @@
     <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ProemSports_-_Copy.psa-demo-java.main" scope="TEST" />
-    <orderEntry type="module" module-name="ProemSports_-_Copy.psa-android-tracker.main" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-extensions:2.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.5.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-runtime:2.1.0@aar" level="project" />

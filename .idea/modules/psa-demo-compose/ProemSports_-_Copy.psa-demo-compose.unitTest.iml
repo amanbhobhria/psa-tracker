@@ -17,7 +17,6 @@
               <args>
                 <arg>$MODULE_DIR$/../../../psa-demo-compose/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar</arg>
                 <arg>$MODULE_DIR$/../../../psa-demo-compose/build/intermediates/compile_app_classes_jar/debug/classes.jar</arg>
-                <arg>$MODULE_DIR$/../../../psa-tracker/build/intermediates/compile_library_classes_jar/debug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/de03ebcaf1fecba2895003b8d36f7488/transformed/jetified-ui-tooling-1.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0ec0ff474ece235c95c4570760fd5396/transformed/jetified-material-1.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/bef13a736e028b96078f9548b9b30d0e/transformed/jetified-ui-tooling-preview-1.3.0-api.jar</arg>
@@ -89,12 +88,10 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0266fbbc2417757141509b385804e970/transformed/jetified-ads-adservices-1.0.0-beta05-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/c74d84e525f659d1bfd19d848fdd1043/transformed/jetified-kotlinx-coroutines-core-jvm-1.7.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/734317a07c792aa7766ae1e24126a818/transformed/jetified-kotlinx-coroutines-android-1.7.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/6e44950a84770161350a59b2bd1ebd44/transformed/jetified-converter-gson-2.0.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/23c32cd10169eae3ae617df2ad389ed1/transformed/jetified-retrofit-2.9.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/928a8801734b0e9a89ff09d6ef9c3692/transformed/jetified-okhttp-4.10.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/7a228cec380a31de9f5dcf5f7e8988ee/transformed/jetified-okio-jvm-3.0.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/00e7f76b2a769b1198d9a5612ad414fa/transformed/jetified-kotlin-stdlib-jdk8-1.8.20.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/40e732c916a588553d9bea63391e09e0/transformed/jetified-installreferrer-2.2-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/6e44950a84770161350a59b2bd1ebd44/transformed/jetified-converter-gson-2.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/23c32cd10169eae3ae617df2ad389ed1/transformed/jetified-retrofit-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/183a6ee046f000d6529ba7eadca955a3/transformed/jetified-kotlin-stdlib-jdk7-1.8.20.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a13deedf87cadb857188f4631475be79/transformed/jetified-annotation-experimental-1.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3fbcdfbed3dd99ab16a865e10e8ec1e8/transformed/jetified-savedstate-ktx-1.2.1-api.jar</arg>
@@ -121,6 +118,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a56209d3964c2e69c6736ab0cff1e764/transformed/jetified-listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/db456bdbd50f367adaa5f2ca0296cd40/transformed/jetified-startup-runtime-1.1.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout-solver/2.0.1/30988fe2d77f3fe3bf7551bb8a8b795fad7e7226/constraintlayout-solver-2.0.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/cdd07ce43dc9747a6cf4db712d4f0bcb/transformed/jetified-okhttp-3.14.9.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/211bda4950c35e32180aada5a1af58f2/transformed/jetified-okio-1.17.2.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b694d0d91a48ed15966feff2132edd88/transformed/jetified-gson-2.6.1.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-34/android.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
@@ -171,7 +170,6 @@
     <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ProemSports_-_Copy.psa-demo-compose.main" scope="TEST" />
-    <orderEntry type="module" module-name="ProemSports_-_Copy.psa-android-tracker.main" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.compose.ui:ui-tooling:1.3.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.compose.runtime:runtime:1.3.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.compose.ui:ui:1.3.0@aar" level="project" />
@@ -272,8 +270,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.collection:collection-ktx:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:retrofit:2.9.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:okhttp:4.10.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okio:okio-jvm:3.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:okhttp:3.14.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okio:okio:1.17.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:converter-gson:2.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.6.1" level="project" />
   </component>
