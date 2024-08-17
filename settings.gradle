@@ -1,0 +1,6 @@
+include ':psa-tracker'
+include ':psa-demo-java'
+include ':psa-demo-kotlin'
+include ':psa-demo-compose'
+
+project(":psa-tracker").name = "psa-android-tracker"

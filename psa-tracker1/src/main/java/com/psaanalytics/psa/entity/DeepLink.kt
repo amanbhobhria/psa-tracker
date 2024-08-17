@@ -1,0 +1,53 @@
+/*
+ * Copyright (c) 2015-present PSA Analytics Ltd. All rights reserved.
+ *
+ * This program is licensed to you under the Apache License Version 2.0,
+ * and you may not use this file except in compliance with the Apache License Version 2.0.
+ * You may obtain a copy of the Apache License Version 2.0 at http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the Apache License Version 2.0 is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
+ */
+package com.psaanalytics.psa.entity
+
+import com.psaanalytics.psa.payload.SelfDescribingJson
+
+
+/**
+ * Used for the [DeepLink] entity that can be automatically added to the first 
+ * [ScreenView](com.psaanalytics.psa.event.ScreenView) event tracked 
+ * following a deep link.  
+ * 
+ * @see com.psaanalytics.psa.configuration.TrackerConfiguration.deepLinkContext
+ */
+
+
+class DeepLink(url: String) : SelfDescribingJson(SCHEMA_DEEPLINK) {
+    private val parameters = HashMap<String, Any>()
+
+    val url: String?
+        get() = parameters[PARAM_DEEPLINK_URL] as? String?
+    val referrer: String?
+        get() = parameters[PARAM_DEEPLINK_REFERRER] as? String?
+
+    init {
+        parameters[PARAM_DEEPLINK_URL] = url
+        setData(parameters)
+        // TODO Set here further checks about the arguments.
+    }
+
+    // Builder methods
+    fun referrer(referrer: String?): DeepLink {
+        referrer?.let { parameters[PARAM_DEEPLINK_REFERRER] = it }
+        setData(parameters)
+        return this
+    }
+    
+    companion object {
+        const val SCHEMA_DEEPLINK = "iglu:com.snowplowanalytics.mobile/deep_link/jsonschema/1-0-0"
+        const val PARAM_DEEPLINK_REFERRER = "referrer"
+        const val PARAM_DEEPLINK_URL = "url"
+    }
+}

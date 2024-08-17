@@ -1,0 +1,143 @@
+/*
+ * Copyright (c) 2015-present PSA Analytics Ltd. All rights reserved.
+ *
+ * This program is licensed to you under the Apache License Version 2.0,
+ * and you may not use this file except in compliance with the Apache License Version 2.0.
+ * You may obtain a copy of the Apache License Version 2.0 at http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the Apache License Version 2.0 is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
+ */
+package com.psaanalytics.psa.event
+
+import com.psaanalytics.core.constants.Parameters
+import com.psaanalytics.core.constants.TrackerConstants
+import com.psaanalytics.core.tracker.Tracker
+
+/** An ecommerce event. 
+ * @param orderId Identifier of the order.
+ * @param totalValue Total amount of the order.
+ * @param items Items purchased.
+ * @Deprecated Use the ecommerce package instead
+ */
+@Deprecated("Use the ecommerce package instead")
+class EcommerceTransaction(
+    orderId: String,
+    totalValue: Double,
+    items: List<EcommerceTransactionItem>
+) : AbstractPrimitive() {
+    
+    /** Identifier of the order.  */
+    val orderId: String
+
+    /** Total amount of the order.  */
+    val totalValue: Double
+    
+    /** The list of Transaction Items passed with the event.  */
+    val items: List<EcommerceTransactionItem>
+
+    /** Identifies an affiliation.  */
+    var affiliation: String? = null
+
+    /** Taxes applied to the purchase.  */
+    var taxValue: Double? = null
+
+    /** Total amount for shipping.  */
+    var shipping: Double? = null
+
+    /** City for shipping.  */
+    var city: String? = null
+
+    /** State for shipping.  */
+    var state: String? = null
+
+    /** Country for shipping.  */
+    var country: String? = null
+
+    /** Currency used for totalValue and taxValue.  */
+    var currency: String? = null
+
+    /**
+     * Creates an ecommerce event.
+     */
+    init {
+        require(orderId.isNotEmpty()) { "orderId cannot be empty" }
+        
+        this.orderId = orderId
+        this.totalValue = totalValue
+        this.items = ArrayList(items)
+    }
+    
+    // Builder methods
+    
+    /** Identifies an affiliation.  */
+    fun affiliation(affiliation: String?): EcommerceTransaction {
+        this.affiliation = affiliation
+        return this
+    }
+
+    /** Taxes applied to the purchase.  */
+    fun taxValue(taxValue: Double?): EcommerceTransaction {
+        this.taxValue = taxValue
+        return this
+    }
+
+    /** Total amount for shipping.  */
+    fun shipping(shipping: Double?): EcommerceTransaction {
+        this.shipping = shipping
+        return this
+    }
+
+    /** City for shipping.  */
+    fun city(city: String?): EcommerceTransaction {
+        this.city = city
+        return this
+    }
+
+    /** State for shipping.  */
+    fun state(state: String?): EcommerceTransaction {
+        this.state = state
+        return this
+    }
+
+    /** Country for shipping.  */
+    fun country(country: String?): EcommerceTransaction {
+        this.country = country
+        return this
+    }
+
+    /** Currency used for totalValue and taxValue.  */
+    fun currency(currency: String?): EcommerceTransaction {
+        this.currency = currency
+        return this
+    }
+
+    // Public methods
+    
+    override val dataPayload: Map<String, Any?>
+        get() {
+            val payload = HashMap<String, Any?>(9)
+            payload[Parameters.TR_ID] = orderId
+            payload[Parameters.TR_TOTAL] = totalValue.toString()
+            affiliation?.let { payload[Parameters.TR_AFFILIATION] = it }
+            taxValue?.let { payload[Parameters.TR_TAX] = it.toString() }
+            shipping?.let { payload[Parameters.TR_SHIPPING] = it.toString() }
+            city?.let { payload[Parameters.TR_CITY] = it }
+            state?.let { payload[Parameters.TR_STATE] = it }
+            country?.let { payload[Parameters.TR_COUNTRY] = it }
+            currency?.let { payload[Parameters.TR_CURRENCY] = it }
+            return payload
+        }
+    
+    override val name: String
+        get() = TrackerConstants.EVENT_ECOMM
+
+    override fun endProcessing(tracker: Tracker) {
+        for (item in items) {
+            item.orderId = orderId
+            tracker.track(item)
+        }
+    }
+}

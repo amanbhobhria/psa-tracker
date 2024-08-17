@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProemSports_-_Copy.iml" filepath="$PROJECT_DIR$/.idea/modules/ProemSports_-_Copy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.main.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-tracker/ProemSports_-_Copy.psa-android-tracker.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.main.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-compose/ProemSports_-_Copy.psa-demo-compose.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.main.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-java/ProemSports_-_Copy.psa-demo-java.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/psa-demo-kotlin/ProemSports_-_Copy.psa-demo-kotlin.unitTest.iml" />
+    </modules>
+  </component>
+</project>
