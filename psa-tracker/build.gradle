@@ -30,21 +30,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
-        versionName "$project.version"
+        versionName "6.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         debug {
-            buildConfigField "String", "TRACKER_LABEL", "\"andr-$project.version\""
-            buildConfigField "String", "TRACKER_VERSION", "\"$project.version\""
+            buildConfigField "String", "TRACKER_LABEL", "\"andr-6.0.4\""
+            buildConfigField "String", "TRACKER_VERSION", "\"6.0.4\""
 
             testCoverageEnabled = true
         }
         release {
-            buildConfigField "String", "TRACKER_LABEL", "\"andr-$project.version\""
-            buildConfigField "String", "TRACKER_VERSION", "\"$project.version\""
+            buildConfigField "String", "TRACKER_LABEL", "\"andr-6.0.4\""
+            buildConfigField "String", "TRACKER_VERSION", "\"6.0.4\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -149,78 +149,126 @@ coveralls {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
+
+
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                println 'Publishing release:'
-                println GROUP
-                println POM_ARTIFACT_ID
-                println VERSION_NAME
-
-                groupId GROUP
-                artifactId POM_ARTIFACT_ID
-                version VERSION_NAME
+                groupId = 'com.github.amanbhobhria'
+                artifactId = 'psa-tracker'
+                version = '6.0.4'
 
                 from components.release
                 artifact sourcesJar
                 artifact javadocJar
 
                 pom {
-                    name = POM_NAME
-                    packaging = POM_PACKAGING
-                    description = POM_DESCRIPTION
-                    url = POM_URL
+                    name = 'psa-tracker'
+                    packaging = 'aar'
+                    description = 'PSA Tracker Library'
+                    url = 'https://github.com/amanbhobhria/psa-tracker'
 
                     licenses {
                         license {
-                            name = POM_LICENCE_NAME
-                            url = POM_LICENCE_URL
-                            distribution = POM_LICENCE_DIST
+                            name = 'The Apache Software License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution = 'repo'
                         }
                     }
 
                     developers {
                         developer {
-                            id = POM_DEVELOPER_ID
-                            name = POM_DEVELOPER_NAME
+                            id = 'amanbhobhria'
+                            name = 'Aman Bhobhria'
                         }
                     }
 
                     scm {
-                        url = POM_SCM_URL
-                        connection = POM_SCM_CONNECTION
-                        developerConnection = POM_SCM_DEV_CONNECTION
+                        url = 'https://github.com/amanbhobhria/psa-tracker'
+                        connection = 'scm:git:git://github.com/amanbhobhria/psa-tracker.git'
+                        developerConnection = 'scm:git:ssh://github.com/amanbhobhria/psa-tracker.git'
                     }
                 }
             }
         }
     }
+//
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                println 'Publishing release:'
+//                println GROUP
+//                println POM_ARTIFACT_ID
+//                println VERSION_NAME
+//
+//                groupId GROUP
+//                artifactId POM_ARTIFACT_ID
+//                version VERSION_NAME
+//
+//                from components.release
+//                artifact sourcesJar
+//                artifact javadocJar
+//
+//                pom {
+//                    name = POM_NAME
+//                    packaging = POM_PACKAGING
+//                    description = POM_DESCRIPTION
+//                    url = POM_URL
+//
+//                    licenses {
+//                        license {
+//                            name = POM_LICENCE_NAME
+//                            url = POM_LICENCE_URL
+//                            distribution = POM_LICENCE_DIST
+//                        }
+//                    }
+//
+//                    developers {
+//                        developer {
+//                            id = POM_DEVELOPER_ID
+//                            name = POM_DEVELOPER_NAME
+//                        }
+//                    }
+//
+//                    scm {
+//                        url = POM_SCM_URL
+//                        connection = POM_SCM_CONNECTION
+//                        developerConnection = POM_SCM_DEV_CONNECTION
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    signing {
+//        if (System.getenv('ORG_GRADLE_PROJECT_signingKey') && System.getenv('ORG_GRADLE_PROJECT_signingPassword')) {
+//            println 'Found signing credentials. Signing...'
+//            def signingKey = findProperty("signingKey")
+//            def signingPassword = findProperty("signingPassword")
+//            useInMemoryPgpKeys(signingKey, signingPassword)
+//            sign publishing.publications.release
+//            println 'Used useInMemoryPgpKeys()'
+//        } else {
+//            println 'Signing credentials not found, skipping.'
+//        }
+//    }
+//}
 
-    signing {
-        if (System.getenv('ORG_GRADLE_PROJECT_signingKey') && System.getenv('ORG_GRADLE_PROJECT_signingPassword')) {
-            println 'Found signing credentials. Signing...'
-            def signingKey = findProperty("signingKey")
-            def signingPassword = findProperty("signingPassword")
-            useInMemoryPgpKeys(signingKey, signingPassword)
-            sign publishing.publications.release
-            println 'Used useInMemoryPgpKeys()'
-        } else {
-            println 'Signing credentials not found, skipping.'
-        }
-    }
-}
+    tasks.withType(DokkaTask.class) {
+        dokkaSourceSets {
+            configureEach {
+                includes.from(project.files(), "Module.md")
 
-tasks.withType(DokkaTask.class) {
-    dokkaSourceSets {
-        configureEach {
-            includes.from(project.files(), "Module.md")
-
-            perPackageOption {
-                matchingRegex.set("com.psaanalytics.core.*") // exclude core packages from API docs
-                suppress.set(true)
+                perPackageOption {
+                    matchingRegex.set("com.psaanalytics.core.*")
+                    // exclude core packages from API docs
+                    suppress.set(true)
+                }
             }
         }
     }
