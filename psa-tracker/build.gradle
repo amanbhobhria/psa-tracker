@@ -124,6 +124,7 @@ task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.implementation
+    destinationDir = file("$buildDir/docs/javadoc") // Set the destination
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
